@@ -1,0 +1,34 @@
+{
+  "node": {
+    "id": "node1",
+    "host": "localhost",
+    "port": 3001
+  },
+  "cluster": {
+    "nodes": [
+      { "id": "node1", "host": "localhost", "port": 3001 },
+      { "id": "node2", "host": "localhost", "port": 3002 },
+      { "id": "node3", "host": "localhost", "port": 3003 }
+    ]
+  },
+  "raft": {
+    "electionTimeoutMin": 150,
+    "electionTimeoutMax": 300,
+    "heartbeatInterval": 50,
+    "maxLogEntriesPerRequest": 100,
+    "snapshotThreshold": 10000
+  },
+  "storage": {
+    "dataDir": "./data",
+    "maxLogSize": 104857600,
+    "compactionInterval": 3600000
+  },
+  "api": {
+    "timeout": 5000,
+    "maxRequestSize": 1048576
+  },
+  "logging": {
+    "level": "info",
+    "format": "json"
+  }
+}
