@@ -164,3 +164,13 @@ export interface NodeConfig {
   heartbeatIntervalMs: number;
   port: number;
 }
+
+/**
+ * RPC型定義のエクスポート
+ */
+export * from './rpc';
+
+/**
+ * レプリケーション型定義のエクスポート
+ */
+export * from './replication';

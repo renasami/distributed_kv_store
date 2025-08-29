@@ -142,6 +142,18 @@ export class RaftState {
   }
 
   /**
+   * 現在のリーダーIDを取得する
+   */
+  getLeaderId(): NodeId | undefined {
+    if (this.state.type === 'follower') {
+      return this.state.leaderId;
+    } else if (this.state.type === 'leader') {
+      return this.nodeId;
+    }
+    return undefined;
+  }
+
+  /**
    * デバッグ用の状態出力
    */
   toString(): string {

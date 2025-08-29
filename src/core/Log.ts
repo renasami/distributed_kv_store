@@ -7,6 +7,7 @@ import type { LogEntry, LogIndex, Term, Command, Result, LogError, LogStats } fr
 export class RaftLog {
   private entries: LogEntry[] = [];
   private baseIndex: LogIndex = 0;  // スナップショット後の基準インデックス
+  private commitIndex: LogIndex = 0; // コミット済みインデックス
   
   constructor() {
     console.log('情報: ログを初期化しました');
@@ -253,6 +254,26 @@ export class RaftLog {
     
     // 新しいエントリを追加
     return this.appendEntries(newEntries);
+  }
+
+  /**
+   * コミットインデックスの取得
+   */
+  getCommitIndex(): LogIndex {
+    return this.commitIndex;
+  }
+
+  /**
+   * エントリをコミットする
+   */
+  commit(index: LogIndex): void {
+    if (index > this.getLastIndex()) {
+      throw new Error(`エラー: コミットインデックス(${index})が最新インデックス(${this.getLastIndex()})を超えています`);
+    }
+    if (index > this.commitIndex) {
+      this.commitIndex = index;
+      console.log(`情報: コミットインデックスを${index}に更新しました`);
+    }
   }
 
   /**
